@@ -55,11 +55,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
 
                     <Button
                         android:id="@+id/maleSelectionButton"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
                         android:layout_marginTop="16dp"
@@ -72,7 +74,7 @@
 
                     <Button
                         android:id="@+id/femaleSelectionButton"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="16dp"
@@ -84,7 +86,35 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold" />
 
+
+
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <Button
+                        android:id="@+id/otherSelectionButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_rounded_border"
+                        android:elevation="24dp"
+                        android:text="OTHER"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+
+
+
+
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/genderContinueButton"

@@ -89,7 +89,7 @@ public abstract class RestCallBack<T> implements Callback<T> {
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 //
-                    TempStorage.logoutUser();
+                    TempStorage.logoutUser(AppContext.getInstance().getContext());
                     Intent in = new Intent(AppContext.getInstance().getContext(), Login.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

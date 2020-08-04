@@ -8,6 +8,7 @@ import com.quintus.labs.datingapp.rest.RequestModel.AddAddressRequest;
 import com.quintus.labs.datingapp.rest.RequestModel.ChangePasswordModel;
 import com.quintus.labs.datingapp.rest.RequestModel.ChangepasswordRequest;
 import com.quintus.labs.datingapp.rest.RequestModel.EditProfileUpdateRequest;
+import com.quintus.labs.datingapp.rest.RequestModel.FcmTokenUpdateRequest;
 import com.quintus.labs.datingapp.rest.RequestModel.HelpCenterRequestModel;
 import com.quintus.labs.datingapp.rest.RequestModel.LoginRequest;
 import com.quintus.labs.datingapp.rest.RequestModel.PaymentIntentRequest;
@@ -129,6 +130,11 @@ public interface ApiService {
     @Headers("Content-type: application/json")
     @POST(AppConstants.Url.REQUEST_FRIEND)
     Call<ResponseModel<MatchedFriend>> requestFriend(@Body AcceptRejectModel acceptRejectModel);
+
+    @Headers("Content-type: application/json")
+    @POST(AppConstants.Url.UPDATE_DEVICE_TOKEN)
+    Call<ResponseModel<Object>> updateDeviceToken(@Body FcmTokenUpdateRequest fcmTokenUpdateRequest);
+
 
     @Headers("Content-type: application/json")
     @POST(AppConstants.Url.BLOCK)

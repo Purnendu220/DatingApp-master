@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ohoussein.playpauseview:playpauseview:1.0.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f89490b7a13f5a137e44c011399b0d89/jetified-playpauseview-1.0.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f89490b7a13f5a137e44c011399b0d89/jetified-playpauseview-1.0.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c4243ff8010aad5291edc2c4e1123d9/jetified-playpauseview-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2c4243ff8010aad5291edc2c4e1123d9/jetified-playpauseview-1.0.2/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ohoussein.playpauseview/playpauseview/1.0.2/3580d419b452f7919d162721c96e371c285e2d2/playpauseview-1.0.2-javadoc.jar!/" />

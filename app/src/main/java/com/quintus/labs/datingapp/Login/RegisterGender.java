@@ -25,10 +25,12 @@ public class RegisterGender extends AppCompatActivity {
 
     String password;
     User user;
-    Boolean male = true;
+   // Boolean male = true;
     private Button genderContinueButton;
     private Button maleSelectionButton;
+    private Button otherSelectionButton;
     private Button femaleSelectionButton;
+    private int selectedValue = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,17 @@ public class RegisterGender extends AppCompatActivity {
         maleSelectionButton = findViewById(R.id.maleSelectionButton);
         femaleSelectionButton = findViewById(R.id.femaleSelectionButton);
         genderContinueButton = findViewById(R.id.genderContinueButton);
+        otherSelectionButton = findViewById(R.id.otherSelectionButton);
 
 
 
 
-
+        otherSelectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                otherButtonSelected();
+            }
+        });
         maleSelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +72,7 @@ public class RegisterGender extends AppCompatActivity {
         genderContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(male!=null){
+                if(selectedValue>-1){
                     openPreferenceEntryPage();
 
                 }else{
@@ -74,27 +82,36 @@ public class RegisterGender extends AppCompatActivity {
         });
 
     }
+public void otherButtonSelected(){
+    selectedValue = 3;
+    toggleView(femaleSelectionButton,otherSelectionButton,maleSelectionButton);
 
+}
     public void maleButtonSelected() {
-        male = true;
-        toggleView(femaleSelectionButton,maleSelectionButton);
+        selectedValue = 1;
+        toggleView(femaleSelectionButton,maleSelectionButton,otherSelectionButton);
 
     }
 
     public void femaleButtonSelected() {
-        male = false;
-        toggleView(maleSelectionButton,femaleSelectionButton);
+        selectedValue = 2;
+        toggleView(maleSelectionButton,femaleSelectionButton,otherSelectionButton);
 
     }
-    private void toggleView(Button view,Button view1){
+    private void toggleView(Button view,Button view1,Button view2){
         view.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        view2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             view.setBackground(getResources().getDrawable(R.drawable.background_rounded_border));
+            view2.setBackground(getResources().getDrawable(R.drawable.background_rounded_border));
+
         }
         else{
             view.setBackgroundResource(R.drawable.background_rounded_border);
+            view2.setBackgroundResource(R.drawable.background_rounded_border);
 
         }
+
         view1.setTextColor(getResources().getColor(R.color.white));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             view1.setBackground(getResources().getDrawable(R.drawable.white_rounded_button));
@@ -109,11 +126,29 @@ public class RegisterGender extends AppCompatActivity {
     }
 
     public void openPreferenceEntryPage() {
+        String ownSex =null ;
+        String defaultPhoto = null;
 
-        String ownSex = male ? "Male" : "Female";
+        switch (selectedValue){
+             case 1:
+                 ownSex = "Male";
+                 defaultPhoto = "defaultMale";
+                 break;
+             case 2:
+                 ownSex = "Female";
+                 defaultPhoto = "defaultFemale";
+
+
+                 break;
+             case 3:
+                 ownSex = "Other";
+                 defaultPhoto = "defaultOther";
+
+                 break;
+
+         }
         user.setSex(ownSex);
         //set default photo
-        String defaultPhoto = male ? "defaultMale" : "defaultFemale";
         user.setProfileImageUrl(defaultPhoto);
 
         Intent intent = new Intent(this, RegisterGenderPrefection.class);

@@ -26,6 +26,7 @@ import com.quintus.labs.datingapp.Login.Login;
 import com.quintus.labs.datingapp.R;
 import com.quintus.labs.datingapp.Utils.AppConstants;
 import com.quintus.labs.datingapp.Utils.FirebaseRemoteConfigHelper;
+import com.quintus.labs.datingapp.Utils.Helper;
 import com.quintus.labs.datingapp.Utils.ItsAMatchDialog;
 import com.quintus.labs.datingapp.Utils.PulsatorLayout;
 import com.quintus.labs.datingapp.Utils.RemoteConfigConst;
@@ -414,4 +415,9 @@ public static Intent createIntent(Context mContext){
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Helper.refreshDeviceToken();
     }
+}

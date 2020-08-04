@@ -107,6 +107,7 @@ public class AppConstants {
         public static final String SUPER_LIKE = "api/v1/super-like";
         public static final String BLOCK = "api/v1/block";
         public static final String UNBLOCK = "api/v1/unblock";
+        public static final String UPDATE_DEVICE_TOKEN = "/api/v1/updateToken";
 
 
 

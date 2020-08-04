@@ -55,7 +55,7 @@ import retrofit2.Response;
 public class EditProfileNewActivity extends AppCompatActivity implements OnSpinnerItemSelectedListener {
     private Context mContext;
 
-    private SwitchCompat menSwitch,WomenSwitch;
+    private SwitchCompat menSwitch,WomenSwitch,other_switch;
     private CrystalRangeSeekbar ageSeekBar;
     private CrystalSeekbar maximumRangeBar;
     private ImageView imageViewOptions;
@@ -80,7 +80,7 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
     List<String> datasetLookingFor = new LinkedList<>(Arrays.asList("Select","Relationship", "Something Casual", "Don’t Know yet", "Marriage"));
     List<String> datasetsmoking = new LinkedList<>(Arrays.asList("Select","Socially", "Regularly", "Never"));
     List<String> datasetDrinking = new LinkedList<>(Arrays.asList("Select","Socially", "Frequently", "Never"));
-    List<String>  datasetEducation = new LinkedList<>(Arrays.asList("Select","High School", "Vocational School", "In College", "Undergraduate Degree", "In Grad School", "Graduate Degree"));
+    List<String> datasetEducation = new LinkedList<>(Arrays.asList("Select","High School", "Vocational School", "In College", "Undergraduate Degree", "In Grad School", "Graduate Degree"));
     List<String> datasetExercise = new LinkedList<>(Arrays.asList("Select","Active", "Sometimes", "Almost Never"));
     private Dialog dialog;
 
@@ -109,6 +109,7 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
 
         menSwitch =(SwitchCompat)findViewById(R.id.men_switch);
         WomenSwitch =(SwitchCompat)findViewById(R.id.women_switch);
+        other_switch =(SwitchCompat)findViewById(R.id.other_switch);
         maximumRangeBar =(CrystalSeekbar)findViewById(R.id.rangeSeekbarmaximum);
         ageSeekBar =(CrystalRangeSeekbar)findViewById(R.id.rangeSeekbaragerange);
         textViewMin =(TextView) findViewById(R.id.textViewMin);
@@ -173,14 +174,24 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
 
         }
 
-        if(userInfo.getInterested()!=null){
-            if(userInfo.getInterested().equalsIgnoreCase("Female")){
+        if(userInfo.getGender()!=null){
+            if(userInfo.getGender().equalsIgnoreCase("Female")){
                 WomenSwitch.setChecked(true);
                 menSwitch.setChecked(false);
+                other_switch.setChecked(false);
 
-            }else{
-                WomenSwitch.setChecked(false);
+            }
+           else if(userInfo.getGender().equalsIgnoreCase("Male")){
                 menSwitch.setChecked(true);
+                WomenSwitch.setChecked(false);
+                other_switch.setChecked(false);
+
+
+            }
+            else{
+                other_switch.setChecked(true);
+                WomenSwitch.setChecked(false);
+                menSwitch.setChecked(false);
             }
         }
 
@@ -190,9 +201,13 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
                 if(isChecked){
                     menSwitch.setChecked(true);
                     WomenSwitch.setChecked(false);
+                    other_switch.setChecked(false);
+
                 }else{
                     menSwitch.setChecked(false);
                     WomenSwitch.setChecked(true);
+                    other_switch.setChecked(false);
+
                 }
 
 
@@ -204,9 +219,32 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
                 if(!isChecked){
                     menSwitch.setChecked(true);
                     WomenSwitch.setChecked(false);
+                    other_switch.setChecked(false);
+
                 }else{
                     menSwitch.setChecked(false);
                     WomenSwitch.setChecked(true);
+                    other_switch.setChecked(false);
+
+                }
+
+
+            }
+        });
+        other_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    menSwitch.setChecked(false);
+                    WomenSwitch.setChecked(false);
+                    other_switch.setChecked(true);
+
+                }else{
+                    menSwitch.setChecked(true);
+                    WomenSwitch.setChecked(false);
+                    other_switch.setChecked(false);
+
+
                 }
 
 
@@ -231,7 +269,7 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
                edit_text_bio.setText(userInfo.getAbout());
            }
         logoutLayout.setOnClickListener(v -> {
-            TempStorage.logoutUser();
+            TempStorage.logoutUser(mContext);
             Intent in = new Intent(EditProfileNewActivity.this, Login.class);
             startActivity(in);
             finish();
@@ -297,13 +335,31 @@ public class EditProfileNewActivity extends AppCompatActivity implements OnSpinn
        getSupportActionBar().setDisplayShowCustomEnabled(true);
     }
   private void updateProfile(){
-        String intrestedIn = menSwitch.isChecked()?"Male":"Female";
+        String gender=null;
+        if(menSwitch.isChecked()){
+            gender = "Male";
+
+        }else if(WomenSwitch.isChecked()){
+
+            gender = "Female";
+
+
+        }
+        else if(other_switch.isChecked()){
+            gender = "Other";
+
+        }
+        if(gender==null){
+            ToastUtils.show(mContext,"Please Select gender.");
+            return;
+        }
+       // String intrestedIn = menSwitch.isChecked()?"Male":"Female";
         String email = edit_text_email.getText().toString().isEmpty()?userInfo.getEmail():edit_text_email.getText().toString();
       String phone = edit_text_phone.getText().toString().isEmpty()?userInfo.getMobile():edit_text_phone.getText().toString();
       String name = edit_text_name.getText().toString().isEmpty() ? userInfo.getFullName():edit_text_name.getText().toString();
       String dob = textViewAge.getText().toString();
       double height = input_height.getText().toString().length()>0?Double.parseDouble(input_height.getText().toString()):0;
-        EditProfileUpdateRequest updateRequest = new EditProfileUpdateRequest(email, name,"USER",userInfo.getGender(),dob,intrestedIn,
+        EditProfileUpdateRequest updateRequest = new EditProfileUpdateRequest(email, name,"USER",gender,dob,userInfo.getInterested(),
              Integer.valueOf(textViewAgeMin.getText().toString()), Integer.valueOf(textViewAgeMax.getText().toString()), Integer.valueOf(textViewMin.getText().toString()),
               exercise,education,drinking,smoking,lookingFor,pets,kids,politicalLeanings,religion,zodiac,height,edit_text_bio.getText().toString(),phone);
       Call<ResponseModel<UserData>> responseModelCall = RestServiceFactory.createService().updateUser(updateRequest);

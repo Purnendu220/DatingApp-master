@@ -17,9 +17,15 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.quintus.labs.datingapp.R;
+import com.quintus.labs.datingapp.rest.RequestModel.FcmTokenUpdateRequest;
 import com.quintus.labs.datingapp.rest.Response.ImageModel;
 import com.quintus.labs.datingapp.rest.Response.Interest;
+import com.quintus.labs.datingapp.rest.Response.MatchedFriend;
+import com.quintus.labs.datingapp.rest.Response.ResponseModel;
+import com.quintus.labs.datingapp.rest.RestCallBack;
+import com.quintus.labs.datingapp.rest.RestServiceFactory;
 import com.quintus.labs.datingapp.xmpp.utils.MediaModel;
 
 
@@ -30,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by Varun John on 4/20/2018.
@@ -111,5 +120,19 @@ public static void loadImage(Context context, List<ImageModel> media, String gen
 
                 GlideUtils.loadImage(context,url,profileImage,R.drawable.default_man);
 
+    }
+
+    public static void refreshDeviceToken(){
+        RestServiceFactory.createService().updateDeviceToken(new FcmTokenUpdateRequest(FirebaseInstanceId.getInstance().getToken())).enqueue(new RestCallBack<ResponseModel<Object>>() {
+            @Override
+            public void onFailure(Call<ResponseModel<Object>> call, String message) {
+
+            }
+
+            @Override
+            public void onResponse(Call<ResponseModel<Object>> call, Response<ResponseModel<Object>> restResponse, ResponseModel<Object> response) {
+
+            }
+        });
     }
 }

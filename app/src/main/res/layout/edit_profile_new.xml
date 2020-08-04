@@ -115,6 +115,39 @@
             app:track="@null" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/other_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/women_lauout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Other"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/other_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:button="@drawable/custom_switch"
+            android:checked="true"
+            android:thumb="@null"
+            app:track="@null" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/textViewmaximumDistance"
@@ -128,7 +161,7 @@
         android:textStyle="bold"
         android:text="Maximum Distance"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/women_lauout" />
+        app:layout_constraintTop_toBottomOf="@+id/other_layout" />
 
     <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
         android:id="@+id/rangeSeekbarmaximum"
@@ -496,7 +529,13 @@
                 android:textStyle="bold"
                 android:text="Education"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMin" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMin"
+                android:drawableLeft="@drawable/education"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:drawableTint="@color/colorAccent"
+                />
             <org.angmarch.views.NiceSpinner
                 android:id="@+id/nice_spinner_education"
                 android:layout_width="match_parent"

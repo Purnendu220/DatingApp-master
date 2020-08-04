@@ -28,11 +28,11 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_icon"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/security_config"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -49,7 +49,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.Login" />
-        <activity android:name=".Login.RegisterBasicInfo" />
+        <activity android:name=".Login.RegisterBasicInfo"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".Matched.Matched_Activity" />
         <activity android:name=".Profile.Profile_Activity" />
         <activity android:name=".Profile.EditProfileActivity" />
@@ -57,10 +59,18 @@
         <activity android:name=".Matched.ProfileCheckinMatched" />
         <activity android:name=".Profile.EditProfileNewActivity" />
         <activity android:name=".Main.MainActivity" />
-        <activity android:name=".Login.RegisterGender" />
-        <activity android:name=".Login.RegisterGenderPrefection" />
-        <activity android:name=".Login.RegisterAge" />
-        <activity android:name=".Login.RegisterHobby" />
+        <activity android:name=".Login.RegisterGender"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".Login.RegisterGenderPrefection"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".Login.RegisterAge"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".Login.RegisterHobby"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".Profile.SettingsActivity" />
         <activity android:name=".Main.BtnLikeActivity" />
         <activity android:name=".Main.BtnDislikeActivity" />

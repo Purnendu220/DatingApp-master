@@ -146,4 +146,5 @@
     <dimen name="text_edit_form">16sp</dimen>
     <dimen name="margin_5">5dp</dimen>
     <dimen name="line_spacing_extra">6dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
 </resources>
