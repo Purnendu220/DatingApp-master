@@ -14,3 +14,4 @@
 /.gradle/buildOutputCleanup/outputFiles.bin
 /.gradle/5.4.1/fileHashes/resourceHashesCache.bin
 /.gradle/5.4.1/javaCompile/taskHistory.bin
+/app/build/
